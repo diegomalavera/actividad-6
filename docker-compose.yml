@@ -1,10 +1,4 @@
 services:
-    application-dynamodb:
-        container_name: application-dynamodb
-        image: amazon/dynamodb-local
-        ports:
-            - "8000:8000"
-
     application-api:
         container_name: application-api
         build:
