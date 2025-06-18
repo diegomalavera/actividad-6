@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actividad 6 - Administración de usuarios</title>
+</head>
+
+<body>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="header-logo">
+            <h1>Administrador</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <div class="content">
+      <div class="container">
+
+        <div class="users-list">
+          <div class="alerts" id="global-alerts"></div>
+
+          <div class="row">
+            <div class="col">
+              <div class="content-title">
+                <h1>Administración de usuarios</h1>
+                <p>Puedes gestionar los usuarios registrados en la aplicación.</p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="content-action">
+                <button class="btn btn-primary" id="user-create-action">Agregar</button>
+              </div>
+            </div>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo electrónico</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="users-list">
+              <tr class="users-list-empty">
+                <td colspan="4">No se encontraron usuarios</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <div class="modal fade" id="user-form-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <form action="" id="user-form">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Confirmar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col">
+                <div class="form-group mb-4">
+                  <label for="user-name" class="form-label">Nombres: <span class="required">*</span></label>
+                  <input type="text" id="user-name" class="form-control" name="name" placeholder="Ingrese los nombres"
+                    required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mb-4">
+                  <label for="user-name" class="form-label">Apellidos: <span class="required">*</span></label>
+                  <input type="text" id="user-last-name" class="form-control" name="lastName"
+                    placeholder="Ingrese los apellidos" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group mb-4">
+                  <label for="user-name" class="form-label">Correo electrónico: <span class="required">*</span></label>
+                  <input type="email" id="user-email" class="form-control" name="email"
+                    placeholder="Ingrese el correo electronico" required>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group mb-4">
+                  <label for="user-name" class="form-label">Número telefónico: <span class="required">*</span></label>
+                  <input type="text" id="user-phoneNumber" class="form-control" name="phoneNumber"
+                    placeholder="Ingrese el telefono" required>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="user-delete-modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Confirmar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>¿Esta seguro de eliminar este usuario?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="user-delete-confirm">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/template" id="users-list-empty-template">
+    <tr class="users-list-empty">
+      <td colspan="4">No se encontraron usuarios</td>
+    </tr>
+  </script>
+  <script type="text/template" id="users-list-item-template">
+    {{#each users}}
+      <tr>
+        <td>{{ name }}</td>
+        <td>{{ lastName }}</td>
+        <td>{{ email }}</td>
+        <td>
+          <button class="btn btn-info user-update-action" data-id="{{ id }}">Editar</button>
+          <button class="btn btn-danger user-delete-action" data-id="{{ id }}">Eliminar</button>
+        </td>
+      </tr>
+    {{/each}}
+  </script>
+  <script id="alert-error" type="text/template">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+  </script>
+  <script id="alert-success" type="text/template">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
+  </script>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      document.dispatchEvent(new CustomEvent("index:load"));
+    });
+  </script>
+</body>
+
+</html>

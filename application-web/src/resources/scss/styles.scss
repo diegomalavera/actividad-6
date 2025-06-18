@@ -1,0 +1,85 @@
+@use "bootstrap/dist/css/bootstrap.min.css";
+
+p {
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.btn-primary {
+  background-color: #f55266;
+  border-color: #f55266;
+  &:active,
+  &:hover,
+  &:focus {
+      background-color: #d74b5c;
+      border-color: #d74b5c;
+  }
+}
+
+.form-group {
+  .required {
+    color: #dc3545;
+    font-weight: bold;
+  }
+}
+
+.form-control,
+.form-select {
+  background-color: #f1f1f1;
+  border: 1px solid transparent;
+  color: #000000;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+  &:focus {
+    background-color: #f1f1f1;
+    border: 1px solid #cecece;
+    box-shadow: none;
+  }
+}
+
+.page-header {
+  background-color: rgba(34, 41, 52, 1);
+  padding: 1rem 0;
+  color: #ffffff;
+  position: fixed;
+  width: 100%;
+  .header-logo {
+      h1 {
+          font-size: 1.5rem;
+          margin: 0;
+      }
+  }
+  .header-cart {
+      text-align: right;
+  }
+}
+
+.page-content {
+  padding-top: 100px;
+}
+
+.content-title {
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+.content-action {
+  text-align: right;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.users-list-empty {
+  td {
+    text-align: center;
+    padding: 2rem;
+  }
+}

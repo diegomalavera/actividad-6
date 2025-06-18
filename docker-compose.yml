@@ -1,0 +1,24 @@
+services:
+    application-dynamodb:
+        container_name: application-dynamodb
+        image: amazon/dynamodb-local
+        ports:
+            - "8000:8000"
+
+    application-api:
+        container_name: application-api
+        build:
+            context: ./application-api
+            dockerfile: Dockerfile
+        depends_on:
+            - application-dynamodb
+        ports:
+            - "3000:3000"
+
+    application-web:
+        container_name: application-web
+        build:
+            context: ./application-web
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
