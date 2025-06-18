@@ -4,8 +4,6 @@ services:
         build:
             context: ./application-api
             dockerfile: Dockerfile
-        depends_on:
-            - application-dynamodb
         ports:
             - "3000:3000"
 
