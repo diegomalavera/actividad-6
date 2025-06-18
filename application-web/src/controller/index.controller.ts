@@ -11,9 +11,13 @@ export class IndexController {
     userId: string | undefined;
     userDeleteModal: HTMLElement;
     userDeleteModalInstance: bootstrap.Modal;
+    userDeleteConfirm: HTMLElement;
+    userForm: HTMLFormElement;
     userFormModal: HTMLElement;
     userFormModalInstance: bootstrap.Modal;
     userFormMode: string = "create";
+    userCreateAction: HTMLElement;
+    userList: HTMLElement;
 
     constructor() {
         document.addEventListener("index:load", (event: Event) => {
@@ -29,24 +33,21 @@ export class IndexController {
             this.userFormModal
         );
 
-        const confirmDelete = document.getElementById(
+        this.userDeleteConfirm = document.getElementById(
             "user-delete-confirm"
         ) as HTMLElement;
-
-        confirmDelete.addEventListener("click", (event: Event) => {
+        this.userDeleteConfirm.addEventListener("click", (event: Event) => {
             event.preventDefault();
             if (this.userId) {
                 this.deleteUser(this.userId);
             }
         });
 
-        const userForm = document.getElementById(
-            "user-form"
-        ) as HTMLFormElement;
-        if (userForm) {
-            userForm.addEventListener("submit", (event: Event) => {
+        this.userForm = document.getElementById("user-form") as HTMLFormElement;
+        if (this.userForm) {
+            this.userForm.addEventListener("submit", (event: Event) => {
                 event.preventDefault();
-                const formData: FormData = new FormData(userForm);
+                const formData: FormData = new FormData(this.userForm);
                 if (this.userFormMode == "create") {
                     this.createUser(this.userUtil.formDatatoUser(formData));
                 } else if (this.userFormMode == "update") {
@@ -60,22 +61,21 @@ export class IndexController {
             });
         }
 
-        const userCreateAction = document.getElementById(
+        this.userCreateAction = document.getElementById(
             "user-create-action"
         ) as HTMLElement;
-
-        if (userCreateAction) {
-            userCreateAction.addEventListener("click", (event: Event) => {
+        if (this.userCreateAction) {
+            this.userCreateAction.addEventListener("click", (event: Event) => {
                 event.preventDefault();
                 this.userFormModalInstance.show();
                 this.userFormMode = "create";
+                this.userForm.reset();
             });
         }
 
-        const usersList = document.getElementById("users-list") as HTMLElement;
-
-        if (usersList) {
-            usersList.addEventListener("click", (event: Event) => {
+        this.userList = document.getElementById("users-list") as HTMLElement;
+        if (this.userList) {
+            this.userList.addEventListener("click", (event: Event) => {
                 event.preventDefault();
                 const target = event.target as HTMLElement;
                 if (target.classList.contains("user-update-action")) {
@@ -107,28 +107,28 @@ export class IndexController {
         this.userService
             .getUser(id)
             .then((user: User) => {
-                const userForm = document.getElementById(
-                    "user-form"
-                ) as HTMLFormElement;
-                if (userForm) {
+                if (this.userForm) {
+                    this.userForm.reset();
                     this.loadFormField(
-                        userForm.elements.namedItem("name") as HTMLInputElement,
+                        this.userForm.elements.namedItem(
+                            "name"
+                        ) as HTMLInputElement,
                         user.name
                     );
                     this.loadFormField(
-                        userForm.elements.namedItem(
+                        this.userForm.elements.namedItem(
                             "lastName"
                         ) as HTMLInputElement,
                         user.lastName
                     );
                     this.loadFormField(
-                        userForm.elements.namedItem(
+                        this.userForm.elements.namedItem(
                             "email"
                         ) as HTMLInputElement,
                         user.email
                     );
                     this.loadFormField(
-                        userForm.elements.namedItem(
+                        this.userForm.elements.namedItem(
                             "phoneNumber"
                         ) as HTMLInputElement,
                         user.phoneNumber
