@@ -6,7 +6,7 @@ export class UserService {
 
     constructor() {
         this.axios = axios.create({
-            baseURL: "https://ec2-54-91-187-131.compute-1.amazonaws.com:3000/api/v1",
+            baseURL: "http://ec2-54-91-187-131.compute-1.amazonaws.com:3000/api/v1",
             timeout: 5000,
             headers: {
                 "Content-Type": "application/json",
